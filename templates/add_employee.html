@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة موظف جديد</title>
+</head>
+<body>
+    <h2>📥 إضافة موظف جديد</h2>
+    <form action="/add_employee" method="POST" enctype="multipart/form-data">
+        <label for="name">اسم الموظف:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label for="images">اختر صور الموظف (زاويا مختلفة):</label>
+        <input type="file" name="images" accept="image/*" multiple required><br><br>
+
+        <button type="submit">إضافة الموظف</button>
+    </form>
+</body>
+</html>
