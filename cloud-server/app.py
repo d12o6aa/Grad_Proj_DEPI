@@ -12,18 +12,25 @@ STATIC_IMAGES = {
 }
 
 @app.route('/api/registrations')
-def get_registrations():
+def get_verification_results():
     records = []
 
     with open("verification_results.csv", newline='') as f:
         reader = csv.DictReader(f)
         for row in reader:
             ts = datetime.strptime(row['timestamp'], "%Y-%m-%d %H:%M:%S")
-            status = "Failed"
+
             if "FAKE" in row['status']:
                 status = "Fake"
-            
-            photo = STATIC_IMAGES.get(status, STATIC_IMAGES["Failed"])
+                photo = STATIC_IMAGES.get("Fake", STATIC_IMAGES["Failed"])
+            elif "Registration Failed" in row['status']:
+                status = "Failed"
+                photo = STATIC_IMAGES.get("Failed")
+            elif "Verified" in row['status']:
+                status = "Success"
+                photo = STATIC_IMAGES.get("Success")
+            else:
+                continue  # ignore unknown statuses
 
             records.append({
                 "name": row['name'],
@@ -32,6 +39,14 @@ def get_registrations():
                 "status": status,
                 "photo": photo
             })
+
+    records.sort(key=lambda x: f"{x['date']} {x['time']}", reverse=True)
+
+    return jsonify(records)
+
+@app.route('/api/verified-log')
+def get_verified_log():
+    records = []
 
     with open("verified_log.csv", newline='') as f:
         reader = csv.DictReader(f)
@@ -49,6 +64,7 @@ def get_registrations():
     records.sort(key=lambda x: f"{x['date']} {x['time']}", reverse=True)
 
     return jsonify(records)
+
 
 @app.route('/')
 def index():

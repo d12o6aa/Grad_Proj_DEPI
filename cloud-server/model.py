@@ -143,10 +143,14 @@ def verify_identity(img):
     checked_identity = True
     print(f"[DEBUG] identity_verified: {identity_verified}, checked_identity: {checked_identity}")
 
-    if identity_verified and pending_verified_frame is not None:
-        save_frame_image(pending_verified_frame, VERIFIED_FOLDER, f"verified_{current_name}")
+    if identity_verified:
+        print("✅ Verification successful.")
+        if pending_verified_frame is not None:
+            save_frame_image(pending_verified_frame, VERIFIED_FOLDER, f"verified_{current_name}")
+        else:
+            print("[WARNING] No frame available to save despite successful verification.")
     else:
-        print("Verification failed.")
+        print("❌ Verification failed.")
 
 # ======================= Helper =======================
 
@@ -319,7 +323,11 @@ def result():
     if identity_verified:
         save_detailed_result_to_log("✅ Verified", name=current_name, identity_status="Matched")
         threading.Timer(5.0, reset_verification).start()
+        final_spoof_result = None
         return jsonify({"status": "✅ Verified"})
+
+    if current_name == "Unknown" and checked_identity:
+        return jsonify({"status": "❌ Registration Failed"})
 
     save_detailed_result_to_log("❌ Registration Failed", name="Unknown", identity_status="Not Matched")
 
@@ -331,6 +339,7 @@ def result():
 
     reset_verification()
     return jsonify({"status": "❌ Registration Failed"})
+
 # ======================= Start Server =======================
 
 if __name__ == '__main__':
