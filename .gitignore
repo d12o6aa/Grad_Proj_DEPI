@@ -12,8 +12,8 @@ cloud-server/static/failed_frames/*
 shape_predictor_68_face_landmarks.dat
 
 # نتائج وتشغيل النظام
-verified_log.csv
-verification_results.csv
+# verified_log.csv
+# verification_results.csv
 
 # ملفات مؤقتة من بايثون
 __pycache__/
