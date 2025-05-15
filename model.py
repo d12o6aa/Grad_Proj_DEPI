@@ -33,12 +33,12 @@ camera_active = False
 
 LOG_FILE = "verified_log.csv"
 RESULTS_LOG_FILE = "verification_results.csv"
-UPLOAD_FOLDER = "/home/doaa/Test/Grad_Proj_DEPI/cloud-server/Data"
+UPLOAD_FOLDER = "/home/doaa/Test/Grad_Proj_DEPI/Data"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 IDEAL_FACE_AREA = 30000
 TOLERANCE_RATIO = 0.5
 current_name = "Unknown"
-UPLOAD_FOLDER_DATA = "/home/doaa/Test/Grad_Proj_DEPI/cloud-server/static"
+UPLOAD_FOLDER_DATA = "/home/doaa/Test/Grad_Proj_DEPI/static"
 app.config['UPLOAD_FOLDER_DATA'] = UPLOAD_FOLDER_DATA
 FAKE_FOLDER = os.path.join(app.config['UPLOAD_FOLDER_DATA'], 'fake_frames')
 VERIFIED_FOLDER = os.path.join(app.config['UPLOAD_FOLDER_DATA'], 'verified_frames')
