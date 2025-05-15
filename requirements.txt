@@ -1,11 +1,4 @@
-flask
-flask-cors
-numpy
+Flask
 opencv-python
-face-recognition
-pillow
-requests
-gunicorn
-torch
-torchvision
-transformers
+deepface
+numpy

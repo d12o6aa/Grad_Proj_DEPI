@@ -5,7 +5,6 @@ import os
 
 app = Flask(__name__)
 
-# مسار الصور الثابتة في static
 STATIC_IMAGES = {
     "Success": "/static/images/freepik__adjust__49088.png",
     "Failed": "/static/images/freepik__adjust__49086.png",

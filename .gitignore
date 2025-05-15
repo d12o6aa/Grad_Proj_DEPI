@@ -1,0 +1,20 @@
+# بيانات الموظفين
+cloud-server/Data/*
+!cloud-server/Data/.gitkeep
+
+# صور التحقق
+cloud-server/static/fake_frames/*
+cloud-server/static/verified_frames/*
+cloud-server/static/failed_frames/*
+
+# ملفات النماذج والوزنات
+*.pkl
+shape_predictor_68_face_landmarks.dat
+
+# نتائج وتشغيل النظام
+verified_log.csv
+verification_results.csv
+
+# ملفات مؤقتة من بايثون
+__pycache__/
+*.pyc
