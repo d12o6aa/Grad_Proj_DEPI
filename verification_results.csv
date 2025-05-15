@@ -1,0 +1,49 @@
+status,timestamp,name,identity_status
+FAKE (frame),2025-05-15 01:51:39,Unknown,Not Checked
+❌ Registration Failed,2025-05-15 02:06:39,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:17:30,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:17:59,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:18:07,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:18:13,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:18:34,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:20:14,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:20:26,Unknown,Not Matched
+FAKE (frame),2025-05-15 02:20:42,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:20:50,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:20:56,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:21:16,Unknown,Not Checked
+❌ Registration Failed,2025-05-15 02:21:48,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:22:03,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:22:09,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:22:16,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:24:06,Unknown,Not Matched
+FAKE (frame),2025-05-15 02:43:35,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:43:41,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:43:48,Unknown,Not Checked
+FAKE (frame),2025-05-15 02:44:11,Unknown,Not Checked
+❌ Registration Failed,2025-05-15 02:45:05,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:49:51,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:50:25,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 02:50:31,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 03:05:38,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 03:08:18,Unknown,Not Matched
+FAKE (frame),2025-05-15 03:08:39,Unknown,Not Checked
+FAKE (frame),2025-05-15 03:08:50,Unknown,Not Checked
+❌ Registration Failed,2025-05-15 05:31:43,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:31:51,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:34:25,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:35:40,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:42:47,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:44:14,Unknown,Not Matched
+❌ Registration Failed,2025-05-15 05:44:38,Unknown,Not Matched
+✅ Verified,2025-05-15 05:48:32,Didi,Matched
+✅ Verified,2025-05-15 05:48:34,Didi,Matched
+FAKE (frame),2025-05-15 05:48:35,Unknown,Not Checked
+❌ Registration Failed,2025-05-15 05:52:24,Unknown,Not Matched
+✅ Verified,2025-05-15 05:53:28,Didi,Matched
+✅ Verified,2025-05-15 05:53:30,Didi,Matched
+✅ Verified,2025-05-15 05:53:32,Didi,Matched
+✅ Verified,2025-05-15 05:53:50,Didi,Matched
+✅ Verified,2025-05-15 05:53:52,Didi,Matched
+✅ Verified,2025-05-15 05:53:54,Didi,Matched
+FAKE (frame),2025-05-15 05:53:55,Unknown,Not Checked

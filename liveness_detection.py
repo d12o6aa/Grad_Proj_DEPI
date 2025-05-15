@@ -24,10 +24,9 @@ def detect_blink(img):
         right_eye_distance = distance.euclidean(right_eye_points[1], right_eye_points[5])
 
         if left_eye_distance < 4 or right_eye_distance < 4:
-            return False  
+            return False  # blink detected
 
-    return True
-
+    return True  # no blink (live)
 
 def detect_head_movement(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -41,17 +40,14 @@ def detect_head_movement(img):
         right_eye = (landmarks.part(45).x, landmarks.part(45).y)
         
         angle = calculate_head_rotation(left_eye, right_eye, nose)
-        
 
         if abs(angle) < 5:
-            return False 
+            return False  # no head movement
 
-    return True  
+    return True  # head moved
 
 def calculate_head_rotation(left_eye, right_eye, nose):
-
     delta_x = right_eye[0] - left_eye[0]
     delta_y = right_eye[1] - left_eye[1]
-    
     angle = math.atan2(delta_y, delta_x) * 180 / math.pi
     return angle
