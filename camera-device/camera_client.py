@@ -6,7 +6,7 @@ import requests
 import datetime
 import base64
 
-SERVER_URL = "https://your-cloud-api.com/attendance"  # غيّريها لـ URL الحقيقي
+SERVER_URL = "https://your-cloud-api.com/attendance"
 
 def capture_face_and_send():
     video = cv2.VideoCapture(0)

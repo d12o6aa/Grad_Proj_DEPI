@@ -5,6 +5,9 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/health')
+def health():
+    return "OK", 200
 STATIC_IMAGES = {
     "Success": "/static/images/freepik__adjust__49088.png",
     "Failed": "/static/images/freepik__adjust__49086.png",
@@ -30,7 +33,7 @@ def get_verification_results():
                 status = "Success"
                 photo = STATIC_IMAGES.get("Success")
             else:
-                continue  # ignore unknown statuses
+                continue
 
             records.append({
                 "name": row['name'],
