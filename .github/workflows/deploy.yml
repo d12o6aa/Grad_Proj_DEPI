@@ -20,12 +20,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd cloud-server
         pip install -r requirements.txt
 
     - name: Zip project
       run: |
-        cd cloud-server
         zip -r ../app.zip .
 
     - name: Deploy to Azure Web App

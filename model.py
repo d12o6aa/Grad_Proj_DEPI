@@ -15,9 +15,7 @@ from datetime import datetime
 import numpy as np
 
 app = Flask(__name__)
-@app.route('/health')
-def health():
-    return "OK", 200
+
 executor = ThreadPoolExecutor()
 
 frame = None

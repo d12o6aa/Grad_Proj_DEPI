@@ -4,6 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Employee Registration Dashboard</title>
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Nunito|Poppins" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -21,7 +38,7 @@
       font-weight: bold;
     }
     .status-fake {
-      color: #ffc107; /* لون مميز لـ Fake */
+      color: #ffc107;
       font-weight: bold;
     }
     .employee-photo {
@@ -34,98 +51,134 @@
 </head>
 <body>
 
-<div class="container py-4">
-  <h2 class="mb-4">Employee Registration</h2>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="/dashboard" class="logo d-flex align-items-center">
+      <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="">
+      <span class="d-none d-lg-block">NiceAdmin</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div>
+</header>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-6">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+      <a class="nav-link " href="/dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-heading">Pages</li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/add_employee">
+        <i class="bi bi-person"></i>
+        <span>Add Employee</span>
+      </a>
+    </li>
+    
+
+  </ul>
+</aside>
+
+<main id="main" class="main">
+  <div class="container py-4">
+    <h2 class="mb-4">Employee Registration</h2>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
         <div class="card p-3">
-          
           <div class="ratio ratio-4x3 bg-dark rounded">
-            <!-- Replace with camera stream -->
-            <img src="static/images/828.jpg" class="text-white text-center my-auto" width="60" height="60" alt="Recent" />
+            <img src="/static/images/828.jpg" class="text-white text-center my-auto" alt="Camera" />
           </div>
         </div>
       </div>
-    <!-- Stats Only (No Camera) -->
-    <div class="col-md-6">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="card p-3 text-center">
-            <h6>Total Employees</h6>
-            <h3 id="total-employees">0</h3>
+
+      <div class="col-md-6">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card p-3 text-center">
+              <h6>Total Employees</h6>
+              <h3 id="total-employees">0</h3>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 text-center">
-            <h6>Registrations Today</h6>
-            <h3 id="registrations-today">0</h3>
+          <div class="col-md-6">
+            <div class="card p-3 text-center">
+              <h6>Registrations Today</h6>
+              <h3 id="registrations-today">0</h3>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 text-center">
-            <h6>Failed Attempts</h6>
-            <h3 id="failed-attempts">0</h3>
+          <div class="col-md-6">
+            <div class="card p-3 text-center">
+              <h6>Failed Attempts</h6>
+              <h3 id="failed-attempts">0</h3>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card p-3 text-center">
-            <h6>Recent Registration</h6>
-            <img id="recent-photo" src="/static/images/default.png" class="rounded-circle mb-2" width="60" height="60" alt="Recent" />
-            <p id="recent-time" class="mb-0">--</p>
+          <div class="col-md-6">
+            <div class="card p-3 text-center">
+              <h6>Recent Registration</h6>
+              <img id="recent-photo" src="/static/images/default.png" class="rounded-circle mb-2" width="60" height="60" alt="Recent" />
+              <p id="recent-time" class="mb-0">--</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Filters -->
-  <div class="row mb-3">
-    <div class="col-md-3">
-      <label for="filter-date" class="form-label">Filter by Date:</label>
-      <input type="date" id="filter-date" class="form-control" />
+    <!-- Filters -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="filter-date" class="form-label">Filter by Date:</label>
+        <input type="date" id="filter-date" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label for="filter-time" class="form-label">Filter by Time:</label>
+        <input type="time" id="filter-time" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label for="filter-status" class="form-label">Filter by Status:</label>
+        <select id="filter-status" class="form-select">
+          <option value="">All</option>
+          <option value="Success">Success</option>
+          <option value="Failed">Failed</option>
+          <option value="Fake">Fake</option>
+        </select>
+      </div>
+      <div class="col-md-3 d-flex align-items-end">
+        <button id="clear-filters" class="btn btn-secondary w-100">Clear Filters</button>
+      </div>
     </div>
-    <div class="col-md-3">
-      <label for="filter-time" class="form-label">Filter by Time:</label>
-      <input type="time" id="filter-time" class="form-control" />
-    </div>
-    <div class="col-md-3">
-      <label for="filter-status" class="form-label">Filter by Status:</label>
-      <select id="filter-status" class="form-select">
-        <option value="">All</option>
-        <option value="Success">Success</option>
-        <option value="Failed">Failed</option>
-        <option value="Fake">Fake</option>
-      </select>
-    </div>
-    <div class="col-md-3 d-flex align-items-end">
-      <button id="clear-filters" class="btn btn-secondary w-100">Clear Filters</button>
+
+    <!-- Registration Table -->
+    <div class="card p-3">
+      <h5 class="mb-3">Recent Registrations</h5>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="registration-table">
+            <!-- Dynamic content will be inserted here -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+</main>
 
-  <!-- Registration Table -->
-  <div class="card p-3">
-    <h5 class="mb-3">Recent Registrations</h5>
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="registration-table">
-          <!-- Dynamic content will be inserted here -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
 <script>
   let registrationsData = [];
@@ -134,28 +187,28 @@
     try {
       const response = await fetch('/api/registrations');
       const data = await response.json();
-      registrationsData = data; // نخزن البيانات كلها
-      applyFilters(); // نعرض الجدول بعد تطبيق الفلترة
+      registrationsData = data;
+      applyFilters();
     } catch (err) {
       console.error("Error loading dashboard data", err);
     }
   }
 
   function applyFilters() {
-    const dateFilter = document.getElementById('filter-date').value;
-    const timeFilter = document.getElementById('filter-time').value;
-    const statusFilter = document.getElementById('filter-status').value;
+    const date = document.getElementById('filter-date').value;
+    const time = document.getElementById('filter-time').value;
+    const status = document.getElementById('filter-status').value;
 
     let filtered = registrationsData;
 
-    if (dateFilter) {
-      filtered = filtered.filter(item => item.date === dateFilter);
+    if (date) {
+      filtered = filtered.filter(item => item.date === date);
     }
-    if (timeFilter) {
-      filtered = filtered.filter(item => item.time.startsWith(timeFilter));
+    if (time) {
+      filtered = filtered.filter(item => item.time.startsWith(time));
     }
-    if (statusFilter) {
-      filtered = filtered.filter(item => item.status === statusFilter);
+    if (status) {
+      filtered = filtered.filter(item => item.status === status);
     }
 
     renderTable(filtered);
@@ -165,48 +218,42 @@
   function renderTable(data) {
     const tableBody = document.getElementById('registration-table');
     tableBody.innerHTML = '';
-
     data.forEach(entry => {
       const statusClass = entry.status === 'Success' ? 'status-success' :
                           entry.status === 'Failed' ? 'status-failed' :
                           entry.status === 'Fake' ? 'status-fake' : '';
-
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td><img src="${entry.photo}" class="employee-photo" alt="Photo" /></td>
-        <td>${entry.name}</td>
-        <td>${entry.date}</td>
-        <td>${entry.time}</td>
-        <td class="${statusClass}">${entry.status}</td>
-      `;
-      tableBody.appendChild(row);
+      const row = `
+        <tr>
+          <td><img src="${entry.photo}" class="employee-photo" alt="Photo" /></td>
+          <td>${entry.name}</td>
+          <td>${entry.date}</td>
+          <td>${entry.time}</td>
+          <td class="${statusClass}">${entry.status}</td>
+        </tr>`;
+      tableBody.innerHTML += row;
     });
   }
 
   function updateStats(data) {
-    const totalEmployees = data.length;
-    const todayDate = new Date().toISOString().split('T')[0];
-    const registrationsToday = data.filter(item => item.date === todayDate).length;
-    const failedAttempts = data.filter(item => item.status === 'Failed' || item.status === 'Fake').length;
+    const total = data.length;
+    const today = new Date().toISOString().split('T')[0];
+    const todayCount = data.filter(d => d.date === today).length;
+    const failed = data.filter(d => d.status === 'Failed' || d.status === 'Fake').length;
 
-    document.getElementById('total-employees').textContent = totalEmployees;
-    document.getElementById('registrations-today').textContent = registrationsToday;
-    document.getElementById('failed-attempts').textContent = failedAttempts;
+    document.getElementById('total-employees').textContent = total;
+    document.getElementById('registrations-today').textContent = todayCount;
+    document.getElementById('failed-attempts').textContent = failed;
 
-    if (data.length > 0) {
-      document.getElementById('recent-photo').src = data[0].photo || '/static/images/default.png';
-      document.getElementById('recent-time').textContent = data[0].time;
-    } else {
-      document.getElementById('recent-photo').src = '/static/images/default.png';
-      document.getElementById('recent-time').textContent = '--';
+    const recent = data[data.length - 1];
+    if (recent) {
+      document.getElementById('recent-photo').src = recent.photo;
+      document.getElementById('recent-time').textContent = `${recent.date} ${recent.time}`;
     }
   }
 
-  // Event listeners on filters:
   document.getElementById('filter-date').addEventListener('change', applyFilters);
   document.getElementById('filter-time').addEventListener('change', applyFilters);
   document.getElementById('filter-status').addEventListener('change', applyFilters);
-
   document.getElementById('clear-filters').addEventListener('click', () => {
     document.getElementById('filter-date').value = '';
     document.getElementById('filter-time').value = '';
@@ -214,8 +261,7 @@
     applyFilters();
   });
 
-  loadDashboardData();
-  setInterval(loadDashboardData, 10000);
+  window.onload = loadDashboardData;
 </script>
 
 </body>
