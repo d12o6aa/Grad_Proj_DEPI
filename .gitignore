@@ -1,13 +1,11 @@
 # بيانات الموظفين
-cloud-server/Data/*
-!cloud-server/Data/.gitkeep
+Data/*
+!Data/.gitkeep
 
-# صور التحقق
-cloud-server/static/fake_frames/*
-cloud-server/static/verified_frames/*
-cloud-server/static/failed_frames/*
+static/fake_frames/*
+static/verified_frames/*
+static/failed_frames/*
 
-# ملفات النماذج والوزنات
 *.pkl
 shape_predictor_68_face_landmarks.dat
 
