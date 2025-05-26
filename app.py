@@ -1,10 +1,12 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import csv
 from datetime import datetime
 import os
+import base64
 
 app = Flask(__name__)
-
+camera = None
+camera_active = False
 @app.route('/health')
 def health():
     return "OK", 200
@@ -13,6 +15,9 @@ STATIC_IMAGES = {
     "Failed": "/static/images/freepik__adjust__49086.png",
     "Fake": "/static/images/freepik__adjust__49087.png"
 }
+
+UPLOAD_FOLDER = "/home/doaa/Test/Grad_Proj_DEPI/Data"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/api/registrations')
 def get_verification_results():
@@ -68,6 +73,38 @@ def get_verified_log():
 
     return jsonify(records)
 
+@app.route('/add_employee', methods=['GET', 'POST'])
+def add_employee():
+    global camera, camera_active
+    if camera_active and camera is not None:
+        camera.release()
+        camera = None
+        camera_active = False
+        
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            employee_folder = os.path.join(app.config['UPLOAD_FOLDER'], name)
+            os.makedirs(employee_folder, exist_ok=True)
+
+            def save_base64_image(base64_str, filename):
+                image_data = base64.b64decode(base64_str.split(',')[1])
+                filepath = os.path.join(employee_folder, filename)
+                with open(filepath, 'wb') as f:
+                    f.write(image_data)
+
+            if request.form['image1']:
+                save_base64_image(request.form['image1'], f"{name}_front.jpg")
+            if request.form['image2']:
+                save_base64_image(request.form['image2'], f"{name}_left.jpg")
+            if request.form['image3']:
+                save_base64_image(request.form['image3'], f"{name}_right.jpg")
+        
+            return f"✔️ تمت إضافة الموظف {name} بالصور بنجاح."
+        except KeyError as e:
+            return "Missing form field: " + str(e), 400
+
+    return render_template('add_employee.html')
 
 @app.route('/')
 def index():
