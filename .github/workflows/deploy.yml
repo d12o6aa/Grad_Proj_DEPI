@@ -33,6 +33,6 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v3
       with:
-        app-name: verifydashboard-fxbpbjfcgrf5g4ev
+        app-name: verifydashboard
         slot-name: Production
         package: app.zip
