@@ -10,13 +10,14 @@ camera_active = False
 @app.route('/health')
 def health():
     return "OK", 200
+
 STATIC_IMAGES = {
     "Success": "/static/images/freepik__adjust__49088.png",
     "Failed": "/static/images/freepik__adjust__49086.png",
     "Fake": "/static/images/freepik__adjust__49087.png"
 }
 
-UPLOAD_FOLDER = "/home/doaa/Test/Grad_Proj_DEPI/Data"
+UPLOAD_FOLDER = "Grad_Proj_DEPI/Data"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/api/registrations')
